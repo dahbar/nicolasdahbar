@@ -1,0 +1,134 @@
+baseURL = "/"
+languageCode = "en-us"
+disableKinds = ["taxonomy"]
+theme = "sada"
+
+[build]
+    writeStats = true
+
+[params]
+    title = "Nicolas Dahbar"
+    author = "Nicolas Dahbar"
+    theme = "light" # `dark` or `light`
+
+    # Profile section
+    [params.profile]
+        name = "Nicolas Dahbar"
+        title = "Devops Engineer"
+        photo = "images/avatar.jpg"
+
+    # Section for links to social websites
+    [params.social]
+        title = "Links"
+
+        [[params.social.list]]
+        icon = "fab fa-linkedin-in"
+        url = "https://www.linkedin.com/in/dahbar"
+        title = "LinkedIn"
+
+        [[params.social.list]]
+        icon = "fab fa-github"
+        url = "https://github.com/dahbar"
+        title = "GitHub"
+	
+
+    # Education section
+    [params.education]
+        title = "Education"
+
+        [[params.education.list]]
+        degree = "B.Sc. in Computer Science"
+        college = "Technische Universität Berlin"
+        dates = "2018 - 2024"
+        # thesis_title = "Title of the dissertation"
+
+
+    # Languages section
+    [params.language]
+        title = "Languages"
+
+        [[params.language.list]]
+        language = "English"
+        level = "Fluent"
+				
+        [[params.language.list]]
+        language = "German"
+        level = "Fluent"
+
+        [[params.language.list]]
+        language = "Spanish"
+        level = "Fluent"
+
+    [params.aboutme]
+        description = "I'm a Berlin-based DevOps engineer with a passion for building and managing infrastructure, improving software delivery, and software development."
+
+    # Experiences section
+    [params.experiences]
+        title = "Experiences"
+
+        [[params.jobs.list]]
+        position = "Devops Engineer"
+        dates = "10.2024 - *Present*"
+		link = "https://www.toll-collect.de/es/toll_collect/tc_homepage.html"
+        company = "Toll Collect"
+
+        [[params.jobs.list]]
+        position = "Bachelor Thesis"
+        dates = "04.2024 - 09.2024"
+		link = "https://www.dlr.de/de"
+        company = "German Aerospace Center - DLR"
+        thesis_link = "https://elib.dlr.de/210614/1/Bachelorarbeit_Nicolas_Dahbar.pdf"
+        # details = "Brief description of the `work` done. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+        [[params.jobs.list]]
+        position = "Software Development Intern"
+        dates = "09.2023 - 09.2024"
+		link = "https://digitale-schiene-deutschland.de/en"
+        company = "Deutsche Bahn"
+        # details = "Brief description of the `work` done. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+        [[params.jobs.list]]
+        position = "Backend Engineer Working Student"
+        dates = "06.2022 - 11.2022"
+		link = "https://www.biddz.io/"
+        company = "Biddz"
+        # details = "Brief description of the `work` done. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+
+        [[params.jobs.list]]
+        position = "Backend Developer Working Student"
+        dates = "11.2018 - 10.2020"
+		link = "https://www.aklamio.com/en/"
+        company = "Aklamio"
+        # details = "Brief description of the `work` done. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    
+    
+    # Projects section
+    #[params.projects]
+    #    title = "Projects"
+
+    #    [[params.projects.list]]
+    #    title = "Awesome Project 1"
+    #    url = "#"
+    #    description = "Description of the *awesome* project 1"
+		
+	#	[[params.projects.list]]
+    #    title = "Awesome Project 2"
+    #    url = "#"
+    #    description = "Description of the **awesome** project 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+    # Skills section
+    #[params.skills]
+    #    title = "Skills"
+
+    #    [[params.skills.list]]
+    #    skill = "Skill 1, Skill 2"
+    #    skillrating = 95 # out of 100
+                
+    #    [[params.skills.list]]
+    #    skill = "Skill 3"
+    #    skillrating = 90
+		
+    #    [[params.skills.list]]
+    #    skill = "Skill 4"
+    #    skillrating = 80

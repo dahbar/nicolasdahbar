@@ -1,0 +1,39 @@
+<head>
+  <title>{{ .Site.Params.title }}</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="{{ .Site.Params.description }}" />
+  <meta name="author" content="{{ .Site.Params.author }}" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  {{ partial "linkCSS.html" . }}
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"
+  />
+
+  <script>
+    const toggleTheme = (el) => {
+      const html = document.querySelector("html");
+      if (el.classList.contains("fa-moon")) {
+        el.classList.remove("fa-moon");
+        el.classList.add("fa-sun");
+        html.classList.add("dark");
+      } else {
+        el.classList.remove("fa-sun");
+        el.classList.add("fa-moon");
+        html.classList.remove("dark");
+      }
+    };
+  </script>
+  
+</head>
