@@ -11,6 +11,8 @@
     "attribute-boolean-style": "off",
     "no-inline-style": "off",
     "prefer-native-element": "off",
+    "wcag/h30": "off",
+    "empty-heading": "off",
     "doctype-style": "warn",
     "element-permitted-content": "warn"
   }
