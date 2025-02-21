@@ -10,20 +10,17 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^6.0.0",
-    "@tailwindcss/typography": "^0.5.15",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.4.35",
     "postcss-cli": "^11.0.0",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.1"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.33",
-    "postcss-cli": "^11.0.0",
-    "tailwindcss": "^3.4.1"
+    "hugo-extended": "^0.144.2",
+    "postcss-cli": "^11.0.0"
   }
 }

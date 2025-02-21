@@ -7,6 +7,8 @@
   <meta name="description" content="{{ .Site.Params.description }}" />
   <meta name="author" content="{{ .Site.Params.author }}" />
 
+  {{ partial "linkCSS" . }}
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
@@ -14,7 +16,6 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   />
-  {{ partial "linkCSS.html" . }}
 
   <link
     rel="stylesheet"

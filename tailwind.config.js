@@ -6,8 +6,6 @@ module.exports = {
     "./layouts/**/*.html",
     "./content/**/*.{html,md}",
     "./themes/sada/layouts/**/*.html",
-    "./themes/sada/content/**/*.{html,md}",
-    "./assets/**/*.{js,css}",
     // Include any other directories where Tailwind classes are used
   ],
   darkMode: "class", // or 'media' or 'class'

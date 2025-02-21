@@ -35,18 +35,30 @@ jobs:
       - name: Check Hugo version
         run: hugo version
 
-      - name: Check HTML links
+      - name: Start Hugo server
+        run: hugo server -D & # The & runs it in background
+        
+      - name: Wait for Hugo server
         run: |
-          hugo
-          npx broken-link-checker http://localhost:1313 --recursive --ordered
+          # Wait for Hugo to be ready (timeout after 30s)
+          timeout 30 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:1313)" != "200" ]]; do sleep 2; done' || exit 1
+
+      - name: Check broken links
+        run: npx broken-link-checker http://localhost:1313 --recursive --ordered
+
+      - name: Stop Hugo server
+        if: always() # Run even if previous steps fail
+        run: pkill hugo || true
+
+      - name: Run Hugo
+        run: hugo
 
       - name: HTML validation
-        run: |
-          npx html-validate public/
+        run: npx html-validate --config .htmlvalidate.json public/
 
   deploy:
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,20 +69,21 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
           extended: true
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
-        run: hugo --minify
+        run: |
+            hugo --minify
 
       - name: Test public directory
         run: |
@@ -79,24 +92,29 @@ jobs:
             exit 1
           fi
 
-      - name: Deploy to VPS
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "public/"
-          target: "/path/to/your/website/directory"
-
-      - name: Post-deploy checks
+      - name: Clear existing files in Digital Ocean
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
-            curl -f http://your-domain.com
-            # Add any other post-deployment checks here
+            # Backup current site (optional)
+            timestamp=$(date +%Y%m%d_%H%M%S)
+            mkdir -p /var/www/backups
+            tar -czf /var/www/backups/site_backup_$timestamp.tar.gz /var/www/nicolasdahbar
+            # Remove all files in the directory
+            rm -rf /var/www/nicolasdahbar/html/*
+
+      - name: Deploy to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "public/*"
+          target: "/var/www/nicolasdahbar/html"
+          strip_components: 1
 
       - name: Notify on success
         if: success()
