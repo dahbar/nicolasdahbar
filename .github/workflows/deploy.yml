@@ -35,11 +35,20 @@ jobs:
       - name: Check Hugo version
         run: hugo version
 
-      - name: Check HTML links
-        run: hugo server -D
+      - name: Start Hugo server
+        run: hugo server -D & # The & runs it in background
+        
+      - name: Wait for Hugo server
+        run: |
+          # Wait for Hugo to be ready (timeout after 30s)
+          timeout 30 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:1313)" != "200" ]]; do sleep 2; done' || exit 1
 
       - name: Check broken links
         run: npx broken-link-checker http://localhost:1313 --recursive --ordered
+
+      - name: Stop Hugo server
+        if: always() # Run even if previous steps fail
+        run: pkill hugo || true
 
       - name: Run Hugo
         run: hugo
