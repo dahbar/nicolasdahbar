@@ -98,14 +98,19 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # Backup current site (optional)
-            # timestamp=$(date +%Y%m%d_%H%M%S)
-            # mkdir -p /var/www/backups
-            # tar -czf /var/www/backups/site_backup_$timestamp.tar.gz /var/www/yourdomain.com
-
-            # Test for now
+            # Remove all files in the directory
             # rm -rf /var/www/yourdomain.com/*
-            touch test.txt
+            touch /var/www/test.txt
+
+      - name: Deploy to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "public/*"
+          target: "/var/www/yourdomain.com"
+          strip_components: 1
 
       - name: Notify on success
         if: success()
