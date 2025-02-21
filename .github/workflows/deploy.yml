@@ -83,7 +83,6 @@ jobs:
 
       - name: Build
         run: |
-            npm run build
             hugo --minify
 
       - name: Test public directory
