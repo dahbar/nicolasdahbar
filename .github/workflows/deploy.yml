@@ -84,7 +84,7 @@ jobs:
       - name: Build
         run: |
             npm run build
-            hugo
+            hugo --minify
 
       - name: Test public directory
         run: |
