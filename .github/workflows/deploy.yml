@@ -54,7 +54,7 @@ jobs:
         run: hugo
 
       - name: HTML validation
-        run: npx html-validate public/
+        run: npx html-validate --config .htmlvalidate.json public/
 
   deploy:
     needs: test
