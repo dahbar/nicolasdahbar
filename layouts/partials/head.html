@@ -21,13 +21,6 @@
     href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"
   />
 
-  <!-- Tailwind CSS -->
-  {{ $css := resources.Get "output.css" }}
-  {{ with $css }}
-    {{ $style := . | css.PostCSS }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-  {{ end }}
-
   <script>
     const toggleTheme = (el) => {
       const html = document.querySelector("html");

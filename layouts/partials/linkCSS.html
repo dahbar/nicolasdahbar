@@ -1,0 +1,6 @@
+{{ $css := resources.Get "input.css" }}
+{{ $style := $css | resources.PostCSS }}
+{{ if hugo.IsProduction }}
+  {{ $style = $style | minify | fingerprint }}
+{{ end }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}"> 
