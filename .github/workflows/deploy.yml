@@ -36,13 +36,16 @@ jobs:
         run: hugo version
 
       - name: Check HTML links
-        run: |
-          hugo
-          npx broken-link-checker http://localhost:1313 --recursive --ordered
+        run: hugo server -D
+
+      - name: Check broken links
+        run: npx broken-link-checker http://localhost:1313 --recursive --ordered
+
+      - name: Run Hugo
+        run: hugo
 
       - name: HTML validation
-        run: |
-          npx html-validate public/
+        run: npx html-validate public/
 
   deploy:
     needs: test
