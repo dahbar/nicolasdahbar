@@ -82,7 +82,9 @@ jobs:
         run: npm install
 
       - name: Build
-        run: hugo
+        run: |
+            npm run build
+            hugo
 
       - name: Test public directory
         run: |
