@@ -1,0 +1,105 @@
+name: Deploy Hugo site to VPS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check Hugo version
+        run: hugo version
+
+      - name: Check HTML links
+        run: |
+          hugo
+          npx broken-link-checker http://localhost:1313 --recursive --ordered
+
+      - name: HTML validation
+        run: |
+          npx html-validate public/
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Test public directory
+        run: |
+          if [ ! -d "public" ]; then
+            echo "Public directory not found!"
+            exit 1
+          fi
+
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "public/"
+          target: "/path/to/your/website/directory"
+
+      - name: Post-deploy checks
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            curl -f http://your-domain.com
+            # Add any other post-deployment checks here
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "Deployment successful!"
+          # Add notification service here if desired (Slack, Email, etc.)
