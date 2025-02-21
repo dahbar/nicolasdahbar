@@ -7,7 +7,7 @@ module.exports = {
     "./content/**/*.{html,md}",
     "./themes/sada/layouts/**/*.html",
     "./themes/sada/content/**/*.{html,md}",
-    "./assets/**/*.{js,css}",
+    "./assets/*.{js,css}",
     "./public/**/*.{js,css}",
     // Include any other directories where Tailwind classes are used
   ],
