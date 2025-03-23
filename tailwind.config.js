@@ -20,10 +20,10 @@ module.exports = {
         DEFAULT: {
           css: {
             a: {
-              color: theme("colors.blue.700"),
+              color: theme("colors.green.800"),
               textDecoration: "none",
               "&:hover": {
-                color: theme("colors.blue.900"),
+                color: theme("colors.green.800"),
                 textDecoration: "underline",
               },
             },
