@@ -4,9 +4,31 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'content/**'
+      - 'layouts/**'
+      - 'static/**'
+      - 'themes/**'
+      - 'assets/**'
+      - 'config.toml'
+      - 'package.json'
+      - 'tailwind.config.js'
+      - 'postcss.config.js'
+      - '.github/workflows/**'
   pull_request:
     branches:
       - master
+    paths:
+      - 'content/**'
+      - 'layouts/**'
+      - 'static/**'
+      - 'themes/**'
+      - 'assets/**'
+      - 'config.toml'
+      - 'package.json'
+      - 'tailwind.config.js'
+      - 'postcss.config.js'
+      - '.github/workflows/**'
 
 jobs:
   test:
